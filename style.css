@@ -1,0 +1,26 @@
+.MainPanel{
+    margin-left: auto;
+    margin-right: auto;
+}
+.InputImagesPanel{
+    display: flex;
+}
+.InputImagePanel{
+}
+
+.InputImageItem {
+    margin: 1rem;
+}
+.InputImage {
+}
+.ScriptPanel{
+    display: flex;
+    flex-direction: column;
+}
+.ExecButton {
+    margin: 1rem;
+}
+.ScriptBox {
+    width: 90%;
+    height: 20rem;
+}

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>OpenCV.js sandbox</title>
+    <link href="style.css" rel="stylesheet" type="text/css" media="all">
+</head>
+
+<body>
+    <div class="MainPanel">
+        <div id="inputImagesPanel" class="InputImagesPanel">
+            <div class="InputImagePanel">
+                <div class="InputImageItem">対象画像1 <input type="file" id="fileInput1" name="file" /></div>
+                <img id="imageSrc1" src="./no_image.png" class="InputImage InputImageItem" />
+            </div>
+            <div class="InputImagePanel">
+                <div class="InputImageItem">対象画像2<input type="file" id="fileInput2" name="file" /></div>
+                <img id="imageSrc2" src="./no_image.png" class="InputImage InputImageItem" />
+            </div>
+        </div>
+        <div id="scriptPanel" class="ScriptPanel">
+            <div class="Caption">実行スクリプト</div>
+            <textarea id="txtSource" class="ScriptBox">
+let img1Element = document.getElementById('imageSrc1');
+let mat = cv.imread(img1Element);
+console.log('image1 width: ' + mat.cols + '\n' +
+'image1 height: ' + mat.rows + '\n' +
+'image1 size: ' + mat.size().width + ',' + mat.size().height + '\n' +
+'image1 depth: ' + mat.depth() + '\n' +
+'image1 channels: ' + mat.channels() + '\n' +
+'image1 type: ' + mat.type() + '\n')
+cv.imshow('canvasOutput', mat);
+mat.delete();
+            </textarea>
+            <input type="submit" id="btnExec" class="ExecButton" value="実行" onClick="runSource();" />
+        </div>
+        <div class="OutputImagePanel">
+            <div class="caption">出力</div>
+            <canvas id="canvasOutput"></canvas>
+        </div>
+    </div>
+    <script type="text/javascript">
+        /*
+        0: opencv loading status
+        1: image1 loading status
+        2: image2 loading status
+        3: image1 changed status
+        4: image2 changed status
+        */
+        var submitEnablingConditions = [false, false, false, false, false]
+        let img1Element = document.getElementById('imageSrc1');
+        let input1Element = document.getElementById('fileInput1');
+        input1Element.addEventListener('change', (e) => {
+            img1Element.src = URL.createObjectURL(e.target.files[0]);
+            submitEnablingConditions[1] = false
+            submitEnablingConditions[3] = true
+            checkEnablingSubmit()
+        }, false);
+        img1Element.onload = function () {
+            submitEnablingConditions[1] = true
+            checkEnablingSubmit()
+        };
+
+        let img2Element = document.getElementById('imageSrc2');
+        let input2Element = document.getElementById('fileInput2');
+        input2Element.addEventListener('change', (e) => {
+            img2Element.src = URL.createObjectURL(e.target.files[0]);
+            submitEnablingConditions[2] = false
+            submitEnablingConditions[4] = true
+            checkEnablingSubmit()
+        }, false);
+        img2Element.onload = function () {
+            submitEnablingConditions[2] = true
+            checkEnablingSubmit()
+        };
+
+        var Module = {
+            // https://emscripten.org/docs/api_reference/module.html#Module.onRuntimeInitialized
+            onRuntimeInitialized() {
+                submitEnablingConditions[0] = true
+                checkEnablingSubmit()
+            }
+        };
+        var checkEnablingSubmit = function () {
+            var enabled = true;
+            submitEnablingConditions.forEach(function (elem) {
+                enabled = enabled & elem
+            })
+            let btnExec = document.getElementById('btnExec');
+            if (enabled) {
+                btnExec.removeAttribute("disabled")
+            } else {
+                btnExec.setAttribute("disabled", true)
+            }
+        }
+        var runSource = function () {
+            let txtSource = document.getElementById('txtSource');
+            eval(txtSource.value);
+        }
+        checkEnablingSubmit()
+    </script>
+    <script async src="opencv.js" type="text/javascript"></script>
+</body>
+
+</html>
