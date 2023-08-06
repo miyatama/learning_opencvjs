@@ -118,6 +118,10 @@ Hough
 
 ## AKAZE
 
+### 特徴マッチ
+
+<details><summary>Code</summary><div>
+
 ```js
 let img1Element = document.getElementById('imageSrc1');
 let img1Raw = cv.imread(img1Element);
@@ -207,14 +211,18 @@ filteredMatches.delete();
 matchingImage.delete();
 ```
 
+</div></details>
+
 + [OpenCVで他のどの記事よりも頑強に特徴量マッチングしてみた(Python, AKAZE)](https://qiita.com/grouse324/items/74988134a9073568b32d)
 + [Opencv.js - findPerspective returns wrong corners coordinatesa](https://answers.opencv.org/question/235594/opencvjs-findperspective-returns-wrong-corners-coordinates/_)
 
 
-特徴点マッチと画像置き換え
+### 特徴点マッチと画像置き換え
 
 + [DMatch](https://docs.opencv.org/4.8.0/d4/de0/classcv_1_1DMatch.html)
 + [DMatchVector](https://cancerberosgx.github.io/demos/mirada-opencv-api-html/classes/_types_opencv__hacks_.dmatchvector.html)
+
+<details><summary>Code</summary><div>
 
 ```js
 let img1Element = document.getElementById('imageSrc1');
@@ -230,7 +238,6 @@ let imgTrain = new cv.Mat();
 let maskTrain = new cv.Mat();
 let trainKeypoints = new cv.KeyPointVector();
 let trainDescriptors = new cv.Mat();
-
 
 cv.cvtColor(
   imgQueryRaw, 
@@ -347,3 +354,5 @@ trainMatchKeypoints.delete();
 matcher.delete();
 matches.delete();
 ```
+
+</div></details>
