@@ -18,6 +18,10 @@
                 <div class="InputImageItem">対象画像2<input type="file" id="fileInput2" name="file" /></div>
                 <img id="imageSrc2" src="./no_image.png" class="InputImage InputImageItem" />
             </div>
+            <div class="InputImagePanel">
+                <div class="InputImageItem">対象画像3<input type="file" id="fileInput3" name="file" /></div>
+                <img id="imageSrc3" src="./no_image.png" class="InputImage InputImageItem" />
+            </div>
         </div>
         <div id="scriptPanel" class="ScriptPanel">
             <div class="Caption">実行スクリプト</div>
@@ -45,16 +49,18 @@ mat.delete();
         0: opencv loading status
         1: image1 loading status
         2: image2 loading status
-        3: image1 changed status
-        4: image2 changed status
+        3: image3 loading status
+        4: image1 changed status
+        5: image2 changed status
+        6: image3 changed status
         */
-        var submitEnablingConditions = [false, false, false, false, false]
+        var submitEnablingConditions = [false, false, false, false, false, false, false]
         let img1Element = document.getElementById('imageSrc1');
         let input1Element = document.getElementById('fileInput1');
         input1Element.addEventListener('change', (e) => {
             img1Element.src = URL.createObjectURL(e.target.files[0]);
             submitEnablingConditions[1] = false
-            submitEnablingConditions[3] = true
+            submitEnablingConditions[4] = true
             checkEnablingSubmit()
         }, false);
         img1Element.onload = function () {
@@ -67,11 +73,24 @@ mat.delete();
         input2Element.addEventListener('change', (e) => {
             img2Element.src = URL.createObjectURL(e.target.files[0]);
             submitEnablingConditions[2] = false
-            submitEnablingConditions[4] = true
+            submitEnablingConditions[5] = true
             checkEnablingSubmit()
         }, false);
         img2Element.onload = function () {
             submitEnablingConditions[2] = true
+            checkEnablingSubmit()
+        };
+
+        let img3Element = document.getElementById('imageSrc3');
+        let input3Element = document.getElementById('fileInput3');
+        input3Element.addEventListener('change', (e) => {
+            img3Element.src = URL.createObjectURL(e.target.files[0]);
+            submitEnablingConditions[3] = false
+            submitEnablingConditions[6] = true
+            checkEnablingSubmit()
+        }, false);
+        img3Element.onload = function () {
+            submitEnablingConditions[3] = true
             checkEnablingSubmit()
         };
 

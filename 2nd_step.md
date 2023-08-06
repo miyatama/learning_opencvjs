@@ -90,14 +90,14 @@ src.delete();
 
 rotation。回転行列 + warpAffineで実装する。
 
-```math
+$$
 \begin{bmatrix}
-\alpha & \beta & (1 - \alpha) \times center.x - \beta \ times center.y \ 
+\alpha & \beta & (1 - \alpha) \times center.x - \beta \ times center.y \\
 -\beta & \alpha & \beta \times center.x + (1 - \alpha) \times center.y
-\end{bmatrix} \
-\alpha = scale \times \cos\theta \
+\end{bmatrix} \\
+\alpha = scale \times \cos\theta \\
 \beta = scale \times \sin\theta
-```
+$$
 
 ```js
 let img1Element = document.getElementById('imageSrc1');
