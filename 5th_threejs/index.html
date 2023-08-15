@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>OpenCV.js sandbox</title>
+    <link href="style.css" rel="stylesheet" type="text/css" media="all">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script type="importmap">
+    {
+        "imports": {
+            "three": "./three.module.js",
+            "three/examples/jsm/": "./jsm/"
+        }
+    }
+    </script>
+    <script type="module" src="scripts.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script
+        src="https://cdn.jsdelivr.net/npm/material-design-inspired-color-picker@1.7.2/dist/md-color-picker.min.js"></script>
+</head>
+
+<body>
+    <div class="InputImageItem">change texture<input type="button" id="btnTextureChanged" value="apply" /></div>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-8">
+                <div class="card-header border rounded">
+                    <div class="row">
+                        <div class="col-6">
+                            <input type="file" id="uploadFile">
+                        </div>
+                        <div class="col-6 text-right">
+                            x：<span id="dispX">0</span>　y：<span id="dispY">0</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body border rounded" style="background-color: silver; padding: 0rem">
+
+                    <div id="canvas-area" width="100%" style="height: 80vh; position: relative; overflow: hidden;"
+                        class="canvas-wrapper text-center">
+                        <label id="explanation">左上ボタンから画像ファイルを選択してください。</label>
+
+                        <!-- 画像Canvas -->
+                        <canvas id="imageCanvas"
+                            style="top: 0px; right: 0;bottom: 0; left: 0; margin: auto; position: absolute;"></canvas>
+                        <!-- 一時的描画Canvas(直線、短径、円用) -->
+                        <canvas id="drawTempCanvas"
+                            style="top: 0px; right: 0;bottom: 0; left: 0; margin: auto; position: absolute;"></canvas>
+                        <!-- ポインタCanvas -->
+                        <canvas id="pointerCanvas"
+                            style="top: 0px; right: 0;bottom: 0; left: 0; margin: auto; position: absolute;"></canvas>
+                    </div>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="card-body border rounded">
+                    <div class="row">
+                        <div class="col-6">
+                            <h5 class="card-title">モード</h5>
+                            <div class="form-check">
+                                <label class="form-check-label">
+                                    <input class="form-check-input" type="radio" name="mode" value="1" checked>
+                                    描く
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <label class="form-check-label">
+                                    <input class="form-check-input" type="radio" name="mode" value="2">
+                                    消しゴム
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <label class="form-check-label">
+                                    <input class="form-check-input" type="radio" name="mode" value="3">
+                                    画像移動
+                                </label>
+                            </div>
+                            <br>
+                        </div>
+                        <div class="col-6" id="input-type-area">
+                            <h5 class="card-title">描き込みタイプ</h5>
+                            <div class="form-check">
+                                <label class="form-check-label">
+                                    <input class="form-check-input" type="radio" name="input-type" value="1" checked>
+                                    ペン
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <label class="form-check-label">
+                                    <input class="form-check-input" type="radio" name="input-type" value="2">
+                                    直線
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <label class="form-check-label">
+                                    <input class="form-check-input" type="radio" name="input-type" value="3">
+                                    短径
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <label class="form-check-label">
+                                    <input class="form-check-input" type="radio" name="input-type" value="4">
+                                    円
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-body border rounded" id="range-area">
+                    <div class="row">
+                        <div class="col" id="size-area">
+                            <h5 class="card-title">太さ</h5>
+                            <input id="slider" type="range" min="1" max="100" value="10"
+                                onChange="sizeChange(this.value)">
+                            <span id="size">10</span>
+                        </div>
+                        <div class="col" id="transparent-area">
+                            <h5 class="card-title">透過度</h5>
+                            <input id="slider" type="range" min="0.1" max="1" value="1" step="0.1"
+                                onChange="alphaChange(this.value)">
+                            <span id="transparent">1</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-body border rounded" id="color-picker-area">
+                    <h5 class="card-title">色</h5>
+                    <div class="rounded" style="background-color: whitesmoke;">
+                        <md-color-picker id="colorPicker" color-margin="4" colors-per-row="7" color-size="25"
+                            default-tint="500" fixedMinHeight="true" palette="material-full" use-spectrum-picker="false"
+                            value="#000000">
+                        </md-color-picker>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="WideButtonWrappter">
+        <input type="button" style="WideButton" id="btnDrawTextureChanged" value="apply draw texture" />
+    </div>
+    <canvas id="appCanvas" class="ThreeCanvas"></canvas>
+</body>
+
+</html>

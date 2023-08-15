@@ -1,0 +1,34 @@
+.MainPanel{
+    margin-left: auto;
+    margin-right: auto;
+}
+.InputImagesPanel{
+    display: flex;
+}
+.InputImageItem {
+    margin: 1rem;
+}
+.ExecButton {
+    margin: 1rem;
+}
+.ScriptBox {
+    width: 90%;
+    height: 20rem;
+}
+
+body {
+  font-family: system-ui;
+  background: #f06d06;
+  color: white;
+  text-align: center;
+}
+.WideButtonWrappter {
+    text-align: center;
+    margin-top: 1rem;
+}
+.WideButton {
+    width: 80rem;
+}
+.ThreeCanvas{
+    margin: 1rem;
+}
