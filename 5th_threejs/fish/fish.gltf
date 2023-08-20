@@ -33,13 +33,7 @@
 				0
 			],
 			"mesh":1,
-			"name":"Cube",
-			"rotation":[
-				0,
-				-0.7071068286895752,
-				0,
-				0.7071068286895752
-			]
+			"name":"Cube"
 		}
 	],
 	"animations":[
@@ -60,7 +54,7 @@
 					}
 				}
 			],
-			"name":"CubeAction.001",
+			"name":"CubeAction",
 			"samplers":[
 				{
 					"input":8,
@@ -150,14 +144,14 @@
 		{
 			"bufferView":0,
 			"componentType":5126,
-			"count":28,
+			"count":14,
 			"max":[
 				0.13851124048233032,
 				0.3837374448776245,
-				1.8154916763305664
+				1
 			],
 			"min":[
-				-3.785987377166748,
+				-0.13851124048233032,
 				-0.3837374448776245,
 				-1
 			],
@@ -166,32 +160,32 @@
 		{
 			"bufferView":1,
 			"componentType":5126,
-			"count":28,
+			"count":14,
 			"type":"VEC3"
 		},
 		{
 			"bufferView":2,
 			"componentType":5126,
-			"count":28,
+			"count":14,
 			"type":"VEC2"
 		},
 		{
 			"bufferView":3,
 			"componentType":5123,
-			"count":72,
+			"count":36,
 			"type":"SCALAR"
 		},
 		{
 			"bufferView":4,
 			"componentType":5126,
-			"count":80,
+			"count":54,
 			"max":[
 				1.5478802919387817,
 				2.665072441101074,
 				5.099945545196533
 			],
 			"min":[
-				-1.5478802919387817,
+				0,
 				-2.665072441101074,
 				-5.099945545196533
 			],
@@ -200,27 +194,27 @@
 		{
 			"bufferView":5,
 			"componentType":5126,
-			"count":80,
+			"count":54,
 			"type":"VEC3"
 		},
 		{
 			"bufferView":6,
 			"componentType":5126,
-			"count":80,
+			"count":54,
 			"type":"VEC2"
 		},
 		{
 			"bufferView":7,
 			"componentType":5123,
-			"count":336,
+			"count":168,
 			"type":"SCALAR"
 		},
 		{
 			"bufferView":8,
 			"componentType":5126,
-			"count":60,
+			"count":45,
 			"max":[
-				2.5
+				1.875
 			],
 			"min":[
 				0.041666666666666664
@@ -230,79 +224,79 @@
 		{
 			"bufferView":9,
 			"componentType":5126,
-			"count":60,
+			"count":45,
 			"type":"VEC3"
 		},
 		{
 			"bufferView":10,
 			"componentType":5126,
-			"count":60,
+			"count":45,
 			"type":"VEC4"
 		}
 	],
 	"bufferViews":[
 		{
 			"buffer":0,
-			"byteLength":336,
+			"byteLength":168,
 			"byteOffset":0,
 			"target":34962
 		},
 		{
 			"buffer":0,
-			"byteLength":336,
+			"byteLength":168,
+			"byteOffset":168,
+			"target":34962
+		},
+		{
+			"buffer":0,
+			"byteLength":112,
 			"byteOffset":336,
 			"target":34962
 		},
 		{
 			"buffer":0,
-			"byteLength":224,
-			"byteOffset":672,
-			"target":34962
-		},
-		{
-			"buffer":0,
-			"byteLength":144,
-			"byteOffset":896,
+			"byteLength":72,
+			"byteOffset":448,
 			"target":34963
 		},
 		{
 			"buffer":0,
-			"byteLength":960,
-			"byteOffset":1040,
+			"byteLength":648,
+			"byteOffset":520,
 			"target":34962
 		},
 		{
 			"buffer":0,
-			"byteLength":960,
-			"byteOffset":2000,
+			"byteLength":648,
+			"byteOffset":1168,
 			"target":34962
 		},
 		{
 			"buffer":0,
-			"byteLength":640,
-			"byteOffset":2960,
+			"byteLength":432,
+			"byteOffset":1816,
 			"target":34962
 		},
 		{
 			"buffer":0,
-			"byteLength":672,
-			"byteOffset":3600,
+			"byteLength":336,
+			"byteOffset":2248,
 			"target":34963
 		},
 		{
 			"buffer":0,
-			"byteLength":240,
-			"byteOffset":4272
+			"byteLength":180,
+			"byteOffset":2584
+		},
+		{
+			"buffer":0,
+			"byteLength":540,
+			"byteOffset":2764
 		},
 		{
 			"buffer":0,
 			"byteLength":720,
-			"byteOffset":4512
-		},
-		{
-			"buffer":0,
-			"byteLength":960,
-			"byteOffset":5232
+			"byteOffset":3304
 		}
 	],
 	"samplers":[
@@ -313,7 +307,7 @@
 	],
 	"buffers":[
 		{
-			"byteLength":6192,
+			"byteLength":4024,
 			"uri":"fish.bin"
 		}
 	]
